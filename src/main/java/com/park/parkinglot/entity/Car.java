@@ -20,7 +20,7 @@ import javax.persistence.Table;
  * @author Adi
  */
 @Entity
-@Table(name="CARS")
+@Table(name = "CARS")
 public class Car implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,10 +29,10 @@ public class Car implements Serializable {
     private Integer id;
     private String licensePlate;
     private String parkingSpot;
-    
-@ManyToOne(fetch = FetchType.LAZY)
-@JoinColumn(name = "USER_KEY")
-private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_KEY")
+    private User user;
 
     public Integer getId() {
         return id;
@@ -49,16 +49,16 @@ private User user;
     public String getLicensePlate() {
         return licensePlate;
     }
-    
-public void setLicensePlate(String licensePlate) {
+
+    public void setLicensePlate(String licensePlate) {
         this.licensePlate = licensePlate;
     }
 
     public String getParkingSpot() {
         return parkingSpot;
     }
-    
-     public void setParkingSpot(String parkingSpot) {
+
+    public void setParkingSpot(String parkingSpot) {
         this.parkingSpot = parkingSpot;
     }
 
@@ -69,7 +69,6 @@ public void setLicensePlate(String licensePlate) {
     public void setUser(User user) {
         this.user = user;
     }
-    
 
     @Override
     public int hashCode() {
@@ -95,5 +94,5 @@ public void setLicensePlate(String licensePlate) {
     public String toString() {
         return "com.park.parkinglot.entity.Car[ id=" + id + " ]";
     }
-    
+
 }
