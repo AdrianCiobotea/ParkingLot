@@ -25,10 +25,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "EditCar", urlPatterns = {"/EditCar"})
 public class EditCar extends HttpServlet {
-@Inject
-UserBean userBean;
-@Inject
-CarBean carBean;
+
+    @Inject
+    UserBean userBean;
+    @Inject
+    CarBean carBean;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -46,7 +48,7 @@ CarBean carBean;
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EditCar</title>");            
+            out.println("<title>Servlet EditCar</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet EditCar at " + request.getContextPath() + "</h1>");
@@ -67,12 +69,12 @@ CarBean carBean;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<UserDetails> users=userBean.getAllUsers();
+        List<UserDetails> users = userBean.getAllUsers();
         request.setAttribute("users", users);
-        int carId=Integer.parseInt(request.getParameter("id"));
-        CarDetails car=carBean.findById(carId);
+        int carId = Integer.parseInt(request.getParameter("id"));
+        CarDetails car = carBean.findById(carId);
         request.setAttribute("car", car);
-         request.getRequestDispatcher("/WEB-INF/pages/editCar.jsp").forward(request, response);   
+        request.getRequestDispatcher("/WEB-INF/pages/editCar.jsp").forward(request, response);
     }
 
     /**
@@ -86,12 +88,12 @@ CarBean carBean;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String licensePlate=request.getParameter("license_plate");
-        String parkingSpot=request.getParameter("parking_Spot");
-        int ownerId=Integer.parseInt(request.getParameter("owner_id"));
-        int carId=Integer.parseInt(request.getParameter("car_id"));
-        carBean.updateCar(carId,licensePlate,parkingSpot,ownerId);
-        processRequest(request, response);
+        String licensePlate = request.getParameter("license_plate");
+        String parkingSpot = request.getParameter("parking_spot");
+        int ownerId = Integer.parseInt(request.getParameter("owner_id"));
+        int carId = Integer.parseInt(request.getParameter("car_id"));
+        carBean.updateCar(carId, licensePlate, parkingSpot, ownerId);
+        response.sendRedirect(request.getContextPath() + "/Cars");
     }
 
     /**

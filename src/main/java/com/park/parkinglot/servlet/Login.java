@@ -5,13 +5,8 @@
  */
 package com.park.parkinglot.servlet;
 
-import com.park.parkinglot.common.UserDetails;
-import com.park.parkinglot.ejb.CarBean;
-import com.park.parkinglot.ejb.UserBean;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,12 +17,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Adi
  */
-@WebServlet(name = "AddCar", urlPatterns = {"/AddCar"})
-public class AddCar extends HttpServlet {
-@Inject
-UserBean userBean;
-@Inject
-CarBean carBean;
+@WebServlet(name = "Login", urlPatterns = {"/Login"})
+public class Login extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,10 +37,10 @@ CarBean carBean;
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddCar</title>");            
+            out.println("<title>Servlet Login</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddCar at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -66,9 +58,7 @@ CarBean carBean;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<UserDetails> users =userBean.getAllUsers();
-        request.setAttribute("users", users);
-        request.getRequestDispatcher("/WEB-INF/pages/addCar.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
     }
 
     /**
@@ -82,11 +72,7 @@ CarBean carBean;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String licensePlate = request.getParameter("license_plate");
-         String parkingSpot = request.getParameter("parking_spot");
-         int ownerId=Integer.parseInt(request.getParameter("owner_id"));
-         carBean.createCar(licensePlate, parkingSpot, ownerId);
-        response.sendRedirect(request.getContextPath() + "/Cars");
+        processRequest(request, response);
     }
 
     /**

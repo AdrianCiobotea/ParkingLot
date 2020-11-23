@@ -28,6 +28,7 @@ public class Users extends HttpServlet {
 
     @Inject
     private UserBean userBean;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,7 +46,7 @@ public class Users extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Users</title>");            
+            out.println("<title>Servlet Users</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Users at " + request.getContextPath() + "</h1>");
@@ -66,10 +67,10 @@ public class Users extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("activePage","Users");
+        request.setAttribute("activePage", "Users");
         List<UserDetails> users = userBean.getAllUsers();
         request.setAttribute("users", users);
-        request.getRequestDispatcher("/WEB-INF/pages/users.jsp").forward(request, response); 
+        request.getRequestDispatcher("/WEB-INF/pages/users.jsp").forward(request, response);
     }
 
     /**
