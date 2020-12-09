@@ -31,7 +31,7 @@ UserBean userBean;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/pages/addUser.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/user/addUser.jsp").forward(request, response);
     }
 
  
